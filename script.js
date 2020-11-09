@@ -17,9 +17,6 @@ let playable = true;
 
 const correctLetters = [];
 const wrongLetters = [];
-window.onload = ()=>{
-    textMobile.focus();
-}
 //show hidden
 function displayWord() {
     wordEl.innerHTML = `
@@ -102,3 +99,7 @@ function updateWrongLetterEl() {
     updateWrongLetterEl();
     popup.style.display = "none";
   });
+  window.addEventListener("load", function(){
+    // ....
+    textMobile.focus();
+});
