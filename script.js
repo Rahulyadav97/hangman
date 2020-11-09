@@ -39,9 +39,14 @@ function displayWord() {
   }
 displayWord();
 document.addEventListener("keydown", (event) => {
+  
+  //alert(event.keyCode);
     notification.style.visibility = "hidden";
     if (playable) {
+     // alert(event.keyCode);
+     
       if (event.keyCode >= 65 && event.keyCode <= 90) {
+        
         const letter = event.key.toLowerCase();
         if (selectedWords.includes(letter)) {
           if (!correctLetters.includes(letter)) {
@@ -66,7 +71,7 @@ function updateWrongLetterEl() {
       ${wrongLetters.length ? `<p> Wrong letters </p>` : ""}
       ${wrongLetters.map((letter) => `<span>${letter}</span>`)}
       `;
-    //f**k map always return array so only it's showing , to avoid we're using join() haha
+  
     figureParts.forEach((part, index) => {
       const errors = wrongLetters.length;
       if (index < errors) part.style.display = "block";
@@ -100,4 +105,6 @@ function updateWrongLetterEl() {
     updateWrongLetterEl();
     popup.style.display = "none";
   });
- 
+
+
+  
