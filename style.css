@@ -131,3 +131,6 @@
     transform: translateY(-50px);
 
   }
+  input{
+      opacity: 0;
+  }
