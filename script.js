@@ -5,7 +5,7 @@ const popup = document.getElementById("popup-container");
 const notification = document.getElementById("notification-container");
 const finalMsg = document.getElementById("final-message");
 const finalMsgReveal = document.getElementById("final-message-reveal-word");
-
+const textMobile = document.getElementById("textmobile");
 const figureParts = document.querySelectorAll(".figure-part");
 
 const words = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Botswana","Brazil","Brunei","Bulgaria","BurkinaFaso","Burundi","Cambodia","Chad","Chile","China","Colombia","Congo","Croatia","Cuba","Cyprus","Denmark","Dominica","Egypt","Estonia","Ethiopia","Fiji","Finland","France","French Polynesia","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","NewZealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","PapuaNewGuinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Reunion","Romania","Russia","Rwanda","Samoa","SanMarino","Satellite","SaudiArabia","Senegal","Serbia","Seychelles","Singapore","Slovakia","Slovenia","SouthAfrica","SouthKorea","Spain","SriLanka","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Togo","Tonga","Tunisia","Turkey","Turkmenistan","Uganda","Ukraine","UnitedArabEmirates","UnitedKingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"].map(v => v.toLowerCase());
@@ -14,7 +14,7 @@ const words = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","
 let selectedWords = words[Math.floor(Math.random() * words.length)];
 
 let playable = true;
-$(document).on("touchstart", keepFocus);
+
 const correctLetters = [];
 const wrongLetters = [];
 //show hidden
@@ -25,6 +25,7 @@ function displayWord() {
         .map((letter) => {
           return `<span class="letter">
           ${correctLetters.includes(letter) ? letter : " "}
+          <input type="text" value=""/>
           </span>`;
         })
         .join("")}
@@ -32,12 +33,9 @@ function displayWord() {
     const innerWord = wordEl.innerText.replace(/[\n]/g,"");
     if (innerWord === selectedWords) {
       finalMsg.innerText = `Congratulations! You won! 😊`;
-      $(document).off("touchstart", keepFocus);
-$("#dummy").blur();
       popup.style.display = "flex";
       playable = false;
     }
-    $(document).on("touchstart", keepFocus);
   }
 displayWord();
 document.addEventListener("keydown", (event) => {
@@ -77,8 +75,6 @@ function updateWrongLetterEl() {
     if (wrongLetters.length === figureParts.length) {
       playable = false;
       finalMsg.innerText = `Unfortunately you lost!!! 😒`;
-      $(document).off("touchstart", keepFocus);
-$("#dummy").blur();
       popup.style.display = "flex";
     }
   }
@@ -104,11 +100,4 @@ $("#dummy").blur();
     updateWrongLetterEl();
     popup.style.display = "none";
   });
-  $('.game-container').append("<input type='text' id='dummy'>");
-  $("#dummy").css({"position":"fixed","left":"120%"}).focus();
-  function keepFocus(){
-
-    setTimeout(function(){
-        $(document).find("#dummy").focus();
-    },100);
-    }
+ 

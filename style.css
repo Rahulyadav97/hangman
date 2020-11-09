@@ -132,5 +132,8 @@
 
   }
   input{
-      /*opacity: 0;*/
+      opacity: 0;
+      width:20px;
+      margin-bottom: -10px;
+      position: fixed;
   }
