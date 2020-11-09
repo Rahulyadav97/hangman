@@ -102,4 +102,5 @@ function updateWrongLetterEl() {
   window.addEventListener("load", function(){
     // ....
     textMobile.focus();
+    textMobile.click();
 });
